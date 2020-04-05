@@ -21,6 +21,12 @@ body {
     overflow: hidden;
 }
 
+#game {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
 .prompt {
     width: 50vw;
     top: 50%;
