@@ -16,6 +16,23 @@ app.get('/', (req, res) => {
     res.sendFile('index.html')
 })
 
+app.post('/player', (req, res) => {
+    let player = new Player()
+
+    player.setBoard(req.body.width, req.body.height)
+    game.players.addPlayer(player)
+
+    res.send(player)
+})
+
+app.get('/player/:id', (req, res) => {
+    let player = game.players.getPlayer(req.params.id)
+
+    if (!player) res.send(false)
+
+    res.send(player)
+})
+
 var listener = http.listen(process.env.PORT || 4000, () => {
     console.log(`Server listening at http://localhost:${listener.address().port}`)
 })
