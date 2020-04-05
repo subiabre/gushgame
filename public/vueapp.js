@@ -3,9 +3,6 @@ var app = new Vue({
 
     data: {
         playerWelcome: true,
-        playerDead: this.player.dead || false,
-        playerDepleted: this.player.depleted || false,
-        playerVictory: this.player.victory || false,
 
         board: {width: 0, height: 0},
 
@@ -13,7 +10,11 @@ var app = new Vue({
 
         id: '',
 
-        player: {}
+        player: {},
+
+        playerDead: false,
+        playerDepleted: false,
+        playerVictory: false,
     },
 
     methods: {
@@ -56,6 +57,7 @@ var app = new Vue({
             this.player.position = this.position
 
             this.postToServer(`player/${this.player.id}`, this.player)
+            this.trackStatus()
 
             return this.position
         },
@@ -69,6 +71,15 @@ var app = new Vue({
             // Player attacks
             if (moveTo == moveFrom) this.player.attacks = true
             else this.player.attacks = false
+        },
+
+        async trackStatus()
+        {
+            this.player = await this.getFromServer(`player/${this.player.id}`)
+
+            this.playerDead = this.player.dead || false,
+            this.playerDepleted = this.player.depleted || false,
+            this.playerVictory = this.player.victory || false
         },
 
         async postToServer(endpoint, body)
