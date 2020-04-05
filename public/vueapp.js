@@ -26,8 +26,8 @@ var app = new Vue({
         {
             let cookie = document.cookie.match(/gushPlayer=/)
             
-            if (cookie) {
-                this.id = cookie[0].replace(/gushPlayer=/, '')
+            if (typeof cookie == 'object') {
+                this.id = cookie.input.replace(/gushPlayer=/, '')
 
                 return this.id
             }
@@ -77,12 +77,14 @@ var app = new Vue({
     {
         let cookie = this.getPlayerCookie()
         let board = this.getBoardSize()
-        let player = await this.getFromServer(`player/${cookie}`, {})
+
+        let player = cookie ? await this.getFromServer(`player/${cookie}`, {}) : false
 
         if (!cookie || !player) {
-            let player = await this.postToServer('new', board)
+            let player = await this.postToServer('player', board)
             
             this.player = player
+            this.id = player.id
             cookie = player.id
 
             document.cookie = `gushPlayer=${cookie}`
