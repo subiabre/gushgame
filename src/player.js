@@ -56,6 +56,8 @@ class Player
     {
         this.scaling += 0.16
 
+        this.size -= this.scaling
+
         return this.scaling
     }
 
