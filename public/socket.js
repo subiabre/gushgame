@@ -53,7 +53,7 @@ socket.on('unattack', (player) => {
     box.setAttribute(
         'style',
         `width: ${player.size}vw;
-         height: ${player.size}vh;
+         height: ${player.size}vw;
          top: ${player.position.y}vh;
          left: ${player.position.x}vw;
          box-shadow: 0 0 11px ${player.color}`
