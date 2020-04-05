@@ -14,8 +14,6 @@
 
     <body>
         <div id="app" ref="app">
-            <div id="game" v-on:click="trackPosition"></div>
-
             <div class="prompt" v-if="playerVictory">
                 <h1>Has ganado</h1>
                 <p>Enhorabuena. Eres el último con vida.</p>
@@ -26,6 +24,7 @@
             <div class="prompt" v-if="playerDepleted">
                 <h1>Te has agotado</h1>
                 <p>Seguramente por ansioso de mierda. Si intentas poner más de 10 barreras, te agotarás y desaparecerás del mapa.</p>
+                <p>Tus rivales tienen una posibilidad entre 10 de quitarte una barrera en cada movimiento.</p>
                 <p>Ahora tendrás que esperar a que alguien gane para volver a jugar.</p>
             </div>
 
@@ -41,6 +40,8 @@
                 <p><strong>Ataca</strong> haciendo doble click en donde estás.</p>
                 <p>Si eres el último con vida ganas.</p>
             </div>
+
+            <div id="game" v-on:click="trackPosition"></div>
         </div>
 
         <!--Vue.js app-->
