@@ -6,6 +6,7 @@ const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 
 const Player = require('./src/player')
+const Game = require('./src/game')
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true}))
