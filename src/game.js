@@ -42,4 +42,4 @@ class Game
     }
 }
 
-module.exports = Game
+module.exports = new Game
