@@ -21,8 +21,6 @@ var app = new Vue({
         updatePrompt(name, state)
         {
             if (this[name] !== state) this[name] = state
-
-            console.log(this[name])
         },
 
         trackPosition(event)
