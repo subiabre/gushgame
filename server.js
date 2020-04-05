@@ -130,6 +130,7 @@ app.post('/player/:id', (req, res) => {
         let random1 = Math.floor(Math.random() * 10)
         let random2 = Math.floor(Math.random() * 10)
 
+        // Detect a dead player
         if (enemy.id !== player.id && enemy.size === 0) {
 
             enemy.dead = true
@@ -140,7 +141,10 @@ app.post('/player/:id', (req, res) => {
             game.playersOnDead.setPlayer(enemy)
         }
 
-        if (enemy.id !== player.id && random1 === random2) {
+        // Reduce enemies randomly on every move
+        if (enemy.id !== player.id && random1 === random2 &&
+            !game.playersOnDead.getPlayer(enemy.id))
+        {
 
             enemy.scalate()
             enemy.attacks = false
