@@ -45,6 +45,7 @@ app.post('/player/:id', (req, res) => {
     if (player.attacks) {
         event = 'attack'
 
+        player.switchAxis()
         player.scalate()
         
         game.playersOnAttack.setPlayer(player)

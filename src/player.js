@@ -58,6 +58,12 @@ class Player
 
         return this.scaling
     }
+
+    switchAxis()
+    {
+        if (this.axis === 'x') this.axis = 'y'
+        else this.axis = 'x'
+    }
 }
 
 module.exports = Player
