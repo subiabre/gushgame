@@ -62,7 +62,7 @@ app.post('/player/:id', (req, res) => {
             if (moveTo[enemy.axis] < enemy.position[enemy.axis] && moveFrom[enemy.axis] > enemy.position[enemy.axis] &&
                 moveTo[enemy.axis] > enemy.position[enemy.axis] && moveFrom[enemy.axis] < enemy.position[enemy.axis])
                 {
-                    // Emit unattack ...
+                    io.emit('unattack', enemy)
                     game.playersOnAttack.removePlayer(enemy)
 
                     event = 'death'
@@ -96,6 +96,7 @@ app.post('/player/:id', (req, res) => {
         }
     }
 
+    io.emit(event, player)
     game.players.setPlayer(player)
 
     res.send(player)
