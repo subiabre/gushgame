@@ -65,6 +65,7 @@ var app = new Vue({
 
             // Player attacks
             if (moveTo == moveFrom) this.player.attacks = true
+            else this.player.attacks = false
         },
 
         async postToServer(endpoint, body)
