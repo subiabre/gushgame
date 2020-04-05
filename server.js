@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-    res.sendCode(200)
+    res.sendFile('index.html')
 })
 
 var listener = http.listen(process.env.PORT, () => {
