@@ -39,6 +39,33 @@ app.post('/player/:id', (req, res) => {
 
     if (!player || player.dead) return res.send(false) 
 
+    player.attacks = req.body.attacks
+
+    // Player attacks
+    if (player.attacks) {
+        event = 'attack'
+
+        player.scalate()
+        
+        game.playersOnAttack.setPlayer(player)
+    }
+
+    // Player depletes
+    if (player.scaling > 2) {
+        event = 'depletion'
+
+        player.dead = true
+
+        game.playersOnDead.setPlayer(player)
+    }
+
+    // Player wins
+    if (game.players.countPlayers() > 1 && game.players.countPlayers() - game.playersOnDead.countPlayers() == 1) {
+        event = 'victory'
+    }
+
+    console.log(event)
+
     io.emit(event, player)
     game.players.setPlayer(player)
 
