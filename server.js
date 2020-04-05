@@ -35,7 +35,7 @@ app.get('/player/:id', (req, res) => {
 
 app.post('/player/:id', (req, res) => {
     let player = game.players.getPlayer(req.params.id)
-    let event = 'move'
+    let event = 'movement'
 
     if (!player || player.dead) return res.send(false) 
 
@@ -71,6 +71,26 @@ app.post('/player/:id', (req, res) => {
             io.emit('revive', player)
 
             game.playersOnDead.removePlayer(player)
+        }
+    }
+
+    // Player crosses an axis
+    for (let id in game.playersOnAttack.list) {
+        let enemy = game.playersOnAttack.getPlayer(id)
+        let axis = enemy.axis
+
+        if (req.body.position[axis] > enemy.position[axis] && player.position[axis] < enemy.position[axis] &&
+            req.body.position[axis] < enemy.position[axis] && player.position[axis] > enemy.position[axis])
+        {
+            io.emit('unattack', enemy)
+            
+            game.playersOnAttack.removePlayer(enemy)
+            
+            event = 'death'
+
+            player.dead = true
+
+            game.playersOnDead.setPlayer(player)
         }
     }
 
