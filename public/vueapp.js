@@ -77,10 +77,13 @@ var app = new Vue({
         {
             let player = await this.getFromServer(`player/${this.player.id}`)
 
-            this.player.dead = player.dead || false,
-            this.playerDead = player.dead || false,
-            this.player.depleted = player.depleted || false,
-            this.playerDepleted = player.depleted || false,
+            this.player.dead = player.dead || false
+            this.playerDead = player.dead || false
+
+            this.player.depleted = player.depleted || false
+            this.playerDepleted = player.depleted || false
+            if (player.depleted) this.playerDead = false
+
             this.player.victory = player.victory || false
             this.playerVictory = player.victory || false
         },
