@@ -87,7 +87,7 @@ app.post('/player/:id', (req, res) => {
         let enemy = game.playersOnAttack.getPlayer(id)
         let axis = enemy.axis
 
-        if (req.body.position[axis] > enemy.position[axis] && player.position[axis] < enemy.position[axis] &&
+        if (req.body.position[axis] > enemy.position[axis] && player.position[axis] < enemy.position[axis] ||
             req.body.position[axis] < enemy.position[axis] && player.position[axis] > enemy.position[axis])
         {
             io.emit('unattack', enemy)
