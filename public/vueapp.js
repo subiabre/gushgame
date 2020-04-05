@@ -48,6 +48,11 @@ var app = new Vue({
             this.position.x = event.clientX
             this.position.y = event.clientY
 
+            this.player.board = this.board
+            this.player.position = this.position
+
+            this.postToServer(`player/${this.player.id}`, this.player)
+
             return this.position
         },
 
