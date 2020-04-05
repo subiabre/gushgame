@@ -59,3 +59,16 @@ socket.on('unattack', (player) => {
          box-shadow: 0 0 11px ${player.color}`
     )
 })
+
+socket.on('death', (player) => {
+    let box = document.getElementById(player.id)
+
+    box.setAttribute(
+        'style',
+        `width: ${player.size}vw;
+         height: ${player.size}vh;
+         top: ${player.position.y}vh;
+         left: ${player.position.x}vw;
+         filter: blur(11px);`
+    )
+})
