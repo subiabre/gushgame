@@ -20,6 +20,8 @@ class Player
         this.scaling = 0
 
         this.dead = false
+
+        this.attacks = false
     }
 
     setBoard(width, height)
