@@ -37,7 +37,8 @@ app.post('/player/:id', (req, res) => {
     let player = game.players.getPlayer(req.params.id)
     let event = 'movement'
 
-    if (!player || player.dead) return res.send(false) 
+    if (!player) return res.send(false)
+    if (player.dead) return res.send(player)
 
     player.attacks = req.body.attacks
 
