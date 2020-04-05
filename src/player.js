@@ -18,6 +18,10 @@ class Player
         this.position = {x: 0, y: 0}
 
         this.scaling = 1
+
+        this.playerDead = false
+        this.playerDepleted = false
+        this.playerWinner = false
     }
 
     setBoard(width, height)
