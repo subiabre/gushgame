@@ -59,6 +59,7 @@ app.post('/player/:id', (req, res) => {
         event = 'depletion'
 
         player.dead = true
+        player.depleted = true
 
         game.playersOnDead.setPlayer(player)
     }
@@ -67,15 +68,17 @@ app.post('/player/:id', (req, res) => {
     if (game.players.countPlayers() > 1 && game.players.countPlayers() - game.playersOnDead.countPlayers() == 1) {
         event = 'victory'
 
-        player.attacks = 0
-        player.scaling = 0
+        player.victory = true
+        player.attacks = false
+        player.size += 1
 
         for (let id in game.playersOnDead.list) {
             let player = game.playersOnDead.getPlayer(id)
 
             player.dead = false
+            player.depleted = false
             player.attacks = false
-            player.scaling = 0
+            player.size = 2
 
             io.emit('revive', player)
 
@@ -92,6 +95,8 @@ app.post('/player/:id', (req, res) => {
             req.body.position[axis] < enemy.position[axis] && player.position[axis] > enemy.position[axis])
         {
             io.emit('unattack', enemy)
+
+            enemy.attacks = false
             
             game.playersOnAttack.removePlayer(enemy)
             
