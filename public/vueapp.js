@@ -18,8 +18,18 @@ var app = new Vue({
             return this.board
         },
 
+        updatePrompt(name, state)
+        {
+            if (this[name] !== state) this[name] = state
+
+            console.log(this[name])
+        },
+
         trackPosition(event)
         {
+            this.getBoardSize()
+            this.updatePrompt('playerWelcome', false)
+
             this.position.x = event.clientX
             this.position.y = event.clientY
 
