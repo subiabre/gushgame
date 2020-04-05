@@ -72,3 +72,9 @@ socket.on('death', (player) => {
          filter: blur(11px);`
     )
 })
+
+socket.on('depletion', (player) => {
+    let box = document.getElementById(player.id)
+
+    box.remove()
+})
