@@ -19,9 +19,7 @@ class Player
 
         this.scaling = 1
 
-        this.playerDead = false
-        this.playerDepleted = false
-        this.playerWinner = false
+        this.dead = false
     }
 
     setBoard(width, height)
