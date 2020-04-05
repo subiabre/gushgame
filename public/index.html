@@ -12,6 +12,8 @@
 
     <body>
         <div id="app" ref="app">
+            <div id="game" v-on:click="trackPosition"></div>
+
             <div class="prompt" v-if="playerWelcome">
                 <h1>gush</h1>
                 <p>gush is a point and click game about defeating other players.</p>
