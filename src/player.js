@@ -18,7 +18,8 @@ class Player
         this.position = {x: 0, y: 0}
 
         this.dead = false
-
+        this.depleted = false
+        this.victory = false
         this.attacks = false
 
         this.size = 2
