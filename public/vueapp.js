@@ -24,10 +24,10 @@ var app = new Vue({
 
         getPlayerCookie()
         {
-            let cookie = document.cookie.match(/gushPlayer=/)[0]
+            let cookie = document.cookie.match(/gushPlayer=/)
             
-            if (typeof cookie !== undefined) {
-                this.id = cookie.replace(/gushPlayer=/, '')
+            if (cookie) {
+                this.id = cookie[0].replace(/gushPlayer=/, '')
 
                 return this.id
             }
@@ -73,7 +73,7 @@ var app = new Vue({
         }
     },
 
-    mounted()
+    async mounted()
     {
         let cookie = this.getPlayerCookie()
         let board = this.getBoardSize()
