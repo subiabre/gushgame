@@ -63,6 +63,9 @@ app.post('/player/:id', (req, res) => {
     if (game.players.countPlayers() > 1 && game.players.countPlayers() - game.playersOnDead.countPlayers() == 1) {
         event = 'victory'
 
+        player.attacks = 0
+        player.scaling = 0
+
         for (let id in game.playersOnDead.list) {
             let player = game.playersOnDead.getPlayer(id)
 
