@@ -14,13 +14,6 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.sendFile('index.html')
-
-    // Show attacking players to help spawning players
-    for (let id in game.playersOnAttack.list) {
-        let player = game.playersOnAttack.getPlayer(id)
-
-        io.emit('attack', player)
-    }
 })
 
 app.post('/player', (req, res) => {
@@ -36,6 +29,14 @@ app.get('/player/:id', (req, res) => {
     let player = game.players.getPlayer(req.params.id)
 
     if (!player) return res.send(false)
+
+    // Show attacking players to help spawning players
+    for (let id in game.playersOnAttack.list) {
+        let enemy = game.playersOnAttack.getPlayer(id)
+
+        console.log('show enemy barrier')
+        io.emit('attack', enemy)
+    }
 
     res.send(player)
 })
