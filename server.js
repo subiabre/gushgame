@@ -38,63 +38,6 @@ app.post('/player/:id', (req, res) => {
     let event = 'move'
 
     if (!player || player.dead) return res.send(false) 
-    
-    // Receive attack
-    if (req.body.attacks) {
-        event = 'attack'
-        player.scaling()
-
-        game.playersOnAttack.setPlayer(player)
-    }
-
-    // Process movement
-    let moveTo = req.body.position
-    let moveFrom = player.position
-    
-    player.setBoard(req.body.board.width, req.body.board.height)
-    player.setPosition(req.body.position.x, req.body.position.y)
-
-    // Detect deaths
-    if (game.playersOnAttack.countPlayers() > 0) {
-        for (var id in game.playersOnAttack.list) {
-            let enemy = game.playersOnAttack.getPlayer(id)
-
-            if (moveTo[enemy.axis] < enemy.position[enemy.axis] && moveFrom[enemy.axis] > enemy.position[enemy.axis] &&
-                moveTo[enemy.axis] > enemy.position[enemy.axis] && moveFrom[enemy.axis] < enemy.position[enemy.axis])
-                {
-                    io.emit('unattack', enemy)
-                    game.playersOnAttack.removePlayer(enemy)
-
-                    event = 'death'
-                    player.dead = true
-
-                    game.playersOnDead.setPlayer(player)
-                }
-        }
-    }
-
-    // Detect depletions
-    if (player.scalation > 2) {
-        event = 'depletion'
-        player.dead = true
-
-        game.playersOnDead.setPlayer(player)
-    }
-
-    // Detect victories
-    if (game.players.countPlayers() - game.playersOnDead.countPlayers() === 1) {
-        event = 'victory'
-
-        // Revive dead players
-        for (var id in game.playersOnDead.list) {
-            let rival = game.playersOnDead.getPlayer(id)
-
-            rival.dead = false
-            rival.scalation = 0
-
-            game.players.setPlayer(rival)
-        }
-    }
 
     io.emit(event, player)
     game.players.setPlayer(player)
