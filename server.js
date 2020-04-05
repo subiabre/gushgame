@@ -74,6 +74,10 @@ app.post('/player/:id', (req, res) => {
         }
     }
 
+    // Player moves
+    player.setBoard(req.body.board.width, req.body.board.height)
+    player.setPosition(req.body.position.x, req.body.position.y)
+
     console.log(event)
 
     io.emit(event, player)
