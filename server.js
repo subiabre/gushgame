@@ -41,17 +41,18 @@ app.post('/player/:id', (req, res) => {
     if (player.dead) return res.send(player)
 
     player.attacks = req.body.attacks
+    player.victory = false
+    game.playersOnAttack.removePlayer(player)
 
     // Player attacks
     if (player.attacks) {
         event = 'attack'
 
-        player.switchAxis()
         player.scalate()
-
-        console.log(player.size)
         
         game.playersOnAttack.setPlayer(player)
+        
+        player.switchAxis()
     }
 
     // Player depletes
@@ -90,9 +91,10 @@ app.post('/player/:id', (req, res) => {
     for (let id in game.playersOnAttack.list) {
         let enemy = game.playersOnAttack.getPlayer(id)
         let axis = enemy.axis
+        let to = player.calcPosition(req.body.position.x, req.body.position.y)
 
-        if (req.body.position[axis] > enemy.position[axis] && player.position[axis] < enemy.position[axis] ||
-            req.body.position[axis] < enemy.position[axis] && player.position[axis] > enemy.position[axis])
+        if (to[axis] > enemy.position[axis] && player.position[axis] < enemy.position[axis] ||
+            to[axis] < enemy.position[axis] && player.position[axis] > enemy.position[axis])
         {
             io.emit('unattack', enemy)
 
