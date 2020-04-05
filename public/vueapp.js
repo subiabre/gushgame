@@ -45,6 +45,20 @@ var app = new Vue({
             this.position.y = event.clientY
 
             return this.position
+        },
+
+        async postToServer(endpoint, body)
+        {
+            return fetch(endpoint, {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            })
+            .then(res => res.json())
+            .then(res => { return res })
         }
     },
 
