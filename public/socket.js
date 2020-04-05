@@ -1,17 +1,22 @@
 var socket = io()
 var game = document.getElementById('game')
 
+function createBox(player)
+{
+    let box = document.createElement('div')
+        
+    box.setAttribute('id', player.id)
+    box.setAttribute('class', 'player')
+
+    game.appendChild(box)
+
+    return box
+}
+
 socket.on('movement', (player) => {
     let box = document.getElementById(player.id)
 
-    if (!box) {
-        box = document.createElement('div')
-        
-        box.setAttribute('id', player.id)
-        box.setAttribute('class', 'player')
-
-        game.appendChild(box)
-    }
+    if (!box) box = createBox(player)
 
     box.setAttribute(
         'style', 
@@ -26,14 +31,7 @@ socket.on('movement', (player) => {
 socket.on('attack', (player) => {
     let box = document.getElementById(player.id)
     
-    if (!box) {
-        box = document.createElement('div')
-        
-        box.setAttribute('id', player.id)
-        box.setAttribute('class', 'player')
-
-        game.appendChild(box)
-    }
+    if (!box) box = createBox(player)
 
     if (player.axis == 'x') {
         box.setAttribute(
@@ -59,6 +57,8 @@ socket.on('attack', (player) => {
 socket.on('unattack', (player) => {
     let box = document.getElementById(player.id)
 
+    if (!box) box = createBox(player)
+
     box.setAttribute(
         'style',
         `width: ${player.size}vw;
@@ -71,6 +71,8 @@ socket.on('unattack', (player) => {
 
 socket.on('death', (player) => {
     let box = document.getElementById(player.id)
+
+    if (!box) box = createBox(player)
 
     box.setAttribute(
         'style',
@@ -85,11 +87,15 @@ socket.on('death', (player) => {
 socket.on('depletion', (player) => {
     let box = document.getElementById(player.id)
 
+    if (!box) box = createBox(player)
+
     box.remove()
 })
 
 socket.on('revive', (player) => {
     let box = document.getElementById(player.id)
+
+    if (!box) box = createBox(player)
 
     box.setAttribute(
         'style',
@@ -103,6 +109,8 @@ socket.on('revive', (player) => {
 
 socket.on('victory', (player) => {
     let box = document.getElementById(player.id)
+
+    if (!box) box = createBox(player)
 
     box.setAttribute(
         'style',
