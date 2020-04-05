@@ -3,6 +3,9 @@ var app = new Vue({
 
     data: {
         playerWelcome: true,
+        playerDead: this.player.dead || false,
+        playerDepleted: this.player.depleted || false,
+        playerVictory: this.player.victory || false,
 
         board: {width: 0, height: 0},
 
