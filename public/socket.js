@@ -25,6 +25,15 @@ socket.on('movement', (player) => {
 
 socket.on('attack', (player) => {
     let box = document.getElementById(player.id)
+    
+    if (!box) {
+        box = document.createElement('div')
+        
+        box.setAttribute('id', player.id)
+        box.setAttribute('class', 'player')
+
+        game.appendChild(box)
+    }
 
     if (player.axis == 'x') {
         box.setAttribute(

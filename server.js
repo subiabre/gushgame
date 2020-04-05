@@ -22,6 +22,13 @@ app.post('/player', (req, res) => {
     player.setBoard(req.body.width, req.body.height)
     game.players.setPlayer(player)
 
+    // Show attacking players to help spawning players
+    for (let id in game.playersOnAttack.list) {
+        let player = game.playersOnAttack.getPlayer(id)
+
+        io.emit('attack', player)
+    }
+
     res.send(player)
 })
 
@@ -114,8 +121,6 @@ app.post('/player/:id', (req, res) => {
     player.setBoard(req.body.board.width, req.body.board.height)
     player.setPosition(req.body.position.x, req.body.position.y)
     player.spawned = false
-
-    console.log(event)
 
     io.emit(event, player)
     game.players.setPlayer(player)
