@@ -33,7 +33,7 @@ socket.on('attack', (player) => {
              height: ${player.size}vw;
              top: ${player.position.y}vh;
              left: ${0}vw;
-             box-shadow: 0 0 11px ${player.color}`
+             box-shadow: 0 0 22px ${player.color}`
         )
     } else {
         box.setAttribute(
@@ -45,4 +45,17 @@ socket.on('attack', (player) => {
              box-shadow: 0 0 22px ${player.color}`
         )
     }
+})
+
+socket.on('unattack', (player) => {
+    let box = document.getElementById(player.id)
+
+    box.setAttribute(
+        'style',
+        `width: ${player.size}vw;
+         height: ${player.size}vh;
+         top: ${player.position.y}vh;
+         left: ${player.position.x}vw;
+         box-shadow: 0 0 11px ${player.color}`
+    )
 })
