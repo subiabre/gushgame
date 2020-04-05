@@ -48,12 +48,23 @@ var app = new Vue({
             this.position.x = event.clientX
             this.position.y = event.clientY
 
+            this.trackAttack()
+
             this.player.board = this.board
             this.player.position = this.position
 
             this.postToServer(`player/${this.player.id}`, this.player)
 
             return this.position
+        },
+
+        trackAttack()
+        {
+            let moveTo = this.position[this.player.axis]
+            let moveFrom = this.player.position[this.player.axis]
+
+            // Player attacks
+            if (moveTo == moveFrom) this.player.attacks = true
         },
 
         async postToServer(endpoint, body)
