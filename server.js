@@ -28,7 +28,7 @@ app.post('/player', (req, res) => {
 app.get('/player/:id', (req, res) => {
     let player = game.players.getPlayer(req.params.id)
 
-    if (!player) res.send(false)
+    if (!player) return res.send(false)
 
     res.send(player)
 })
@@ -36,7 +36,7 @@ app.get('/player/:id', (req, res) => {
 app.post('/player/:id', (req, res) => {
     let player = game.players.getPlayer(req.params.id)
 
-    if (!player) res.send(false)
+    if (!player) return res.send(false) 
 
     player.setBoard(req.body.board.width, req.body.board.height)
     player.setPosition(req.body.position.x, req.body.position.y)
