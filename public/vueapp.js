@@ -26,7 +26,7 @@ var app = new Vue({
         {
             let cookie = document.cookie.match(/gushPlayer=/)
             
-            if (typeof cookie == 'object') {
+            if (typeof cookie == 'object' && cookie) {
                 this.id = cookie.input.replace(/gushPlayer=/, '')
 
                 return this.id
