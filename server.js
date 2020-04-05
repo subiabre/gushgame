@@ -130,14 +130,14 @@ app.post('/player/:id', (req, res) => {
         let random1 = Math.floor(Math.random() * 10)
         let random2 = Math.floor(Math.random() * 10)
 
-        if (enemy.size === 0) {
+        if (enemy.id !== player.id && enemy.size === 0) {
 
             enemy.dead = true
             enemy.depleted = true
 
             io.emit('depletion', enemy)
 
-            game.playersOnDead.setPlayer(player)
+            game.playersOnDead.setPlayer(enemy)
         }
 
         if (enemy.id !== player.id && random1 === random2) {
