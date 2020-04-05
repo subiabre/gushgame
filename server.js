@@ -67,6 +67,8 @@ app.post('/player/:id', (req, res) => {
             let player = game.playersOnDead.getPlayer(id)
 
             player.dead = false
+            player.attacks = false
+            player.scaling = 0
 
             io.emit('revive', player)
 
