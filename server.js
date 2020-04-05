@@ -47,12 +47,14 @@ app.post('/player/:id', (req, res) => {
 
         player.switchAxis()
         player.scalate()
+
+        console.log(player.size)
         
         game.playersOnAttack.setPlayer(player)
     }
 
     // Player depletes
-    if (player.scaling > 2) {
+    if (player.size === 0) {
         event = 'depletion'
 
         player.dead = true

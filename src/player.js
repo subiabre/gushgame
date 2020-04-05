@@ -17,8 +17,6 @@ class Player
 
         this.position = {x: 0, y: 0}
 
-        this.scaling = 0
-
         this.dead = false
 
         this.attacks = false
@@ -54,9 +52,7 @@ class Player
 
     scalate()
     {
-        this.scaling += 0.16
-
-        this.size -= this.scaling
+        this.size = Math.max(0, this.size - 0.25)
 
         return this.scaling
     }
