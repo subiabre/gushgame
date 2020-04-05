@@ -119,8 +119,8 @@ app.post('/player/:id', (req, res) => {
             game.playersOnDead.setPlayer(player)
         // Break an axis
         } else {
-            let random1 = Math.floor(Math.random() * 5)
-            let random2 = Math.floor(Math.random() * 5)
+            let random1 = Math.floor(Math.random() * 10)
+            let random2 = Math.floor(Math.random() * 10)
 
             if (random1 === random2) {
                 io.emit('unattack', enemy)
