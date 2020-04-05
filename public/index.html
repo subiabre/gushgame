@@ -16,11 +16,30 @@
         <div id="app" ref="app">
             <div id="game" v-on:click="trackPosition"></div>
 
+            <div class="prompt" v-if="playerVictory">
+                <h1>Has ganado</h1>
+                <p>Enhorabuena. Eres el último con vida.</p>
+                <p>Como recompensa ahora puedes poner x1.5 más barreras.</p>
+                <p>Cuando vuelvas a moverte, el resto de jugadores revivirán.</p>
+            </div>
+
+            <div class="prompt" v-if="playerDepleted">
+                <h1>Te has agotado</h1>
+                <p>Seguramente por ansioso de mierda. Si intentas poner más de 10 barreras, te agotarás y desaparecerás del mapa.</p>
+                <p>Ahora tendrás que esperar a que alguien gane para volver a jugar.</p>
+            </div>
+
+            <div class="prompt" v-if="playerDead">
+                <h1>Has muerto</h1>
+                <p>Seguramente por manco. Cuando un jugador ha puesto una barrera y la atraviesas, morirás.</p>
+                <p>Ahora tendrás que esperar a que alguien gane para volver a jugar.</p>
+            </div>
+
             <div class="prompt" v-if="playerWelcome">
-                <h1>gush</h1>
-                <p>gush is a point and click game about defeating other players.</p>
-                <p><strong>Move</strong> by pointing and clicking on your screen.</p>
-                <p><strong>Attack</strong> by double-clicking on where you are.</p>
+                <h1>Bienvenido a gush</h1>
+                <p><strong>Muévete</strong> apuntando y haciendo click en cualquier parte de tu pantalla.</p>
+                <p><strong>Ataca</strong> haciendo doble click en donde estás.</p>
+                <p>Si eres el último con vida ganas.</p>
             </div>
         </div>
 
