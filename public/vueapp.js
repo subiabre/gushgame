@@ -18,6 +18,19 @@ var app = new Vue({
             return this.board
         },
 
+        getPlayerCookie()
+        {
+            let cookie = document.cookie.match(/gushPlayer=/)[0]
+            
+            if (typeof cookie !== undefined) {
+                this.id = cookie.replace(/gushPlayer=/, '')
+
+                return this.id
+            }
+
+            return false
+        },
+
         updatePrompt(name, state)
         {
             if (this[name] !== state) this[name] = state
