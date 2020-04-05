@@ -27,6 +27,12 @@ body {
     position: relative;
 }
 
+.player {
+    background-color: var(--txt);
+    position: absolute;
+    transition: all 0.5s;
+}
+
 .prompt {
     width: 50vw;
     top: 50%;
