@@ -117,18 +117,6 @@ app.post('/player/:id', (req, res) => {
             player.dead = true
 
             game.playersOnDead.setPlayer(player)
-        // Break an axis
-        } else {
-            let random1 = Math.floor(Math.random() * 10)
-            let random2 = Math.floor(Math.random() * 10)
-
-            if (random1 === random2) {
-                io.emit('unattack', enemy)
-
-                enemy.attacks = false
-            
-                game.playersOnAttack.removePlayer(enemy)
-            }
         }
     }
 
@@ -136,6 +124,32 @@ app.post('/player/:id', (req, res) => {
     player.setBoard(req.body.board.width, req.body.board.height)
     player.setPosition(req.body.position.x, req.body.position.y)
     player.spawned = false
+
+    for (let id in game.players.list) {
+        let enemy = game.players.getPlayer(id)
+        let random1 = Math.floor(Math.random() * 10)
+        let random2 = Math.floor(Math.random() * 10)
+
+        if (enemy.size === 0) {
+
+            enemy.dead = true
+            enemy.depleted = true
+
+            io.emit('depletion', enemy)
+
+            game.playersOnDead.setPlayer(player)
+        }
+
+        if (enemy.id !== player.id && random1 === random2) {
+
+            enemy.scalate()
+            enemy.attacks = false
+
+            io.emit('unattack', enemy)
+
+            game.playersOnAttack.removePlayer(enemy)
+        }
+    }
 
     console.log(event)
 
