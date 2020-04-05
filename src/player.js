@@ -17,7 +17,7 @@ class Player
 
         this.position = {x: 0, y: 0}
 
-        this.scaling = 1
+        this.scaling = 0
 
         this.dead = false
     }
@@ -48,9 +48,9 @@ class Player
         return this.position
     }
 
-    reduceScaling()
+    scalate()
     {
-        this.scaling -= 0.16
+        this.scaling += 0.16
 
         return this.scaling
     }
