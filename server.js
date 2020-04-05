@@ -14,13 +14,6 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     res.sendFile('index.html')
-})
-
-app.post('/player', (req, res) => {
-    let player = new Player()
-
-    player.setBoard(req.body.width, req.body.height)
-    game.players.setPlayer(player)
 
     // Show attacking players to help spawning players
     for (let id in game.playersOnAttack.list) {
@@ -28,6 +21,13 @@ app.post('/player', (req, res) => {
 
         io.emit('attack', player)
     }
+})
+
+app.post('/player', (req, res) => {
+    let player = new Player()
+
+    player.setBoard(req.body.width, req.body.height)
+    game.players.setPlayer(player)
 
     res.send(player)
 })
