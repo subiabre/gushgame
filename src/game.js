@@ -7,7 +7,7 @@ class PlayerList
         this.list = {}
     }
             
-    addPlayer(player)
+    setPlayer(player)
     {
         this.list[player.id] = player
     }

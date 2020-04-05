@@ -20,7 +20,7 @@ app.post('/player', (req, res) => {
     let player = new Player()
 
     player.setBoard(req.body.width, req.body.height)
-    game.players.addPlayer(player)
+    game.players.setPlayer(player)
 
     res.send(player)
 })
@@ -41,7 +41,7 @@ app.post('/player/:id', (req, res) => {
     player.setBoard(req.body.board.width, req.body.board.height)
     player.setPosition(req.body.position.x, req.body.position.y)
 
-    game.players.list[player.id] = player
+    game.players.setPlayer(player)
 
     res.send(player)
 }) 
