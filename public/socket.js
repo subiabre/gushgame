@@ -78,3 +78,29 @@ socket.on('depletion', (player) => {
 
     box.remove()
 })
+
+socket.on('revive', (player) => {
+    let box = document.getElementById(player.id)
+
+    box.setAttribute(
+        'style',
+        `width: ${player.size}vw;
+         height: ${player.size}vh;
+         top: ${player.position.y}vh;
+         left: ${player.position.x}vw;
+         box-shadow: 0 0 11px ${player.color}`
+    )
+})
+
+socket.on('victory', (player) => {
+    let box = document.getElementById(player.id)
+
+    box.setAttribute(
+        'style',
+        `width: ${player.size}vw;
+         height: ${player.size}vh;
+         top: ${player.position.y}vh;
+         left: ${player.position.x}vw;
+         box-shadow: 0 0 16px ${player.color}`
+    )
+})
