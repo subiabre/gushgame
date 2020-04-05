@@ -73,7 +73,10 @@ app.post('/player/:id', (req, res) => {
     }
 
     // Player wins
-    if (game.players.countPlayers() > 1 && game.players.countPlayers() - game.playersOnDead.countPlayers() == 1) {
+    if (!player.depleted && !player.dead &&
+         game.players.countPlayers() > 1 && 
+         game.players.countPlayers() - game.playersOnDead.countPlayers() == 1)
+    {
         event = 'victory'
 
         player.victory = true
@@ -121,6 +124,8 @@ app.post('/player/:id', (req, res) => {
     player.setBoard(req.body.board.width, req.body.board.height)
     player.setPosition(req.body.position.x, req.body.position.y)
     player.spawned = false
+
+    console.log(event)
 
     io.emit(event, player)
     game.players.setPlayer(player)
