@@ -75,11 +75,14 @@ var app = new Vue({
 
         async trackStatus()
         {
-            this.player = await this.getFromServer(`player/${this.player.id}`)
+            let player = await this.getFromServer(`player/${this.player.id}`)
 
-            this.playerDead = this.player.dead || false,
-            this.playerDepleted = this.player.depleted || false,
-            this.playerVictory = this.player.victory || false
+            this.player.dead = player.dead || false,
+            this.playerDead = player.dead || false,
+            this.player.depleted = player.depleted || false,
+            this.playerDepleted = player.depleted || false,
+            this.player.victory = player.victory || false
+            this.playerVictory = player.victory || false
         },
 
         async postToServer(endpoint, body)
