@@ -44,11 +44,10 @@ var app = new Vue({
         {
             this.getBoardSize()
             this.updatePrompt('playerWelcome', false)
+            this.trackAttack(event)
 
             this.position.x = event.clientX
             this.position.y = event.clientY
-
-            this.trackAttack()
 
             this.player.board = this.board
             this.player.position = this.position
@@ -58,9 +57,10 @@ var app = new Vue({
             return this.position
         },
 
-        trackAttack()
+        trackAttack(event)
         {
-            let moveTo = this.position[this.player.axis]
+            let axis = 'client' + this.player.axis.toUpperCase()
+            let moveTo = event[axis]
             let moveFrom = this.player.position[this.player.axis]
 
             // Player attacks
