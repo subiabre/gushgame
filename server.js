@@ -16,6 +16,6 @@ app.get('/', (req, res) => {
     res.sendFile('index.html')
 })
 
-var listener = http.listen(process.env.PORT, () => {
+var listener = http.listen(process.env.PORT || 4000, () => {
     console.log(`Server listening at http://localhost:${listener.address().port}`)
 })
