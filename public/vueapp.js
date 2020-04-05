@@ -124,7 +124,7 @@ var app = new Vue({
             this.id = player.id
             cookie = player.id
 
-            document.cookie = `gushPlayer=${cookie}`
+            document.cookie = `gushPlayer=${cookie};max-age=60*60*24*365`
 
             return
         }
