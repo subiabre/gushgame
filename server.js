@@ -62,6 +62,16 @@ app.post('/player/:id', (req, res) => {
     // Player wins
     if (game.players.countPlayers() > 1 && game.players.countPlayers() - game.playersOnDead.countPlayers() == 1) {
         event = 'victory'
+
+        for (let id in game.playersOnDead.list) {
+            let player = game.playersOnDead.getPlayer(id)
+
+            player.dead = false
+
+            io.emit('revive', player)
+
+            game.playersOnDead.removePlayer(player)
+        }
     }
 
     console.log(event)
