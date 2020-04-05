@@ -93,8 +93,8 @@ app.post('/player/:id', (req, res) => {
         let axis = enemy.axis
         let to = player.calcPosition(req.body.position.x, req.body.position.y)
 
-        if (to[axis] > enemy.position[axis] && player.position[axis] < enemy.position[axis] ||
-            to[axis] < enemy.position[axis] && player.position[axis] > enemy.position[axis])
+        if (!player.spawned && to[axis] > enemy.position[axis] && player.position[axis] < enemy.position[axis] ||
+            !player.spawned && to[axis] < enemy.position[axis] && player.position[axis] > enemy.position[axis])
         {
             io.emit('unattack', enemy)
 
@@ -113,6 +113,7 @@ app.post('/player/:id', (req, res) => {
     // Player moves
     player.setBoard(req.body.board.width, req.body.board.height)
     player.setPosition(req.body.position.x, req.body.position.y)
+    player.spawned = false
 
     console.log(event)
 

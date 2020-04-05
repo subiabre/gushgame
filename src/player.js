@@ -21,6 +21,7 @@ class Player
         this.depleted = false
         this.victory = false
         this.attacks = false
+        this.spawned = true
 
         this.size = 2
     }
