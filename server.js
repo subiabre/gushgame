@@ -16,6 +16,6 @@ app.get('/', (req, res) => {
     res.sendCode(200)
 })
 
-var listener = http.listen(8080, () => {
+var listener = http.listen(process.env.PORT, () => {
     console.log(`Server listening at http://localhost:${listener.address().port}`)
 })
