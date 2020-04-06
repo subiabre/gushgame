@@ -24,7 +24,7 @@ socket.on('movement', (player) => {
          height: ${player.size}vw;
          top: ${player.position.y}vh;
          left: ${player.position.x}vw;
-         box-shadow: 0 0 11px ${player.color}`
+         box-shadow: 0 0 1vw 0.5vw ${player.color}`
     )
 })
 
@@ -40,7 +40,7 @@ socket.on('attack', (player) => {
              height: ${100}vh;
              top: ${0}vh;
              left: ${player.position.x}vw;
-             box-shadow: 0 0 22px ${player.color}`
+             box-shadow: 0 0 2vw 0.5vw ${player.color}`
         )
     } else {
         box.setAttribute(
@@ -49,7 +49,7 @@ socket.on('attack', (player) => {
              height: ${player.size}vw;
              top: ${player.position.y}vh;
              left: ${0}vw;
-             box-shadow: 0 0 22px ${player.color}`
+             box-shadow: 0 0 2vw 0.5vw ${player.color}`
         )
     }
 })
@@ -65,7 +65,7 @@ socket.on('unattack', (player) => {
          height: ${player.size}vw;
          top: ${player.position.y}vh;
          left: ${player.position.x}vw;
-         box-shadow: 0 0 11px ${player.color}`
+         box-shadow: 0 0 1vw 0.5vw ${player.color}`
     )
 })
 
@@ -103,7 +103,7 @@ socket.on('revive', (player) => {
          height: ${player.size}vh;
          top: ${player.position.y}vh;
          left: ${player.position.x}vw;
-         box-shadow: 0 0 11px ${player.color}`
+         box-shadow: 0 0 1vw 0.5vw ${player.color}`
     )
 })
 
@@ -118,6 +118,6 @@ socket.on('victory', (player) => {
          height: ${player.size}vh;
          top: ${player.position.y}vh;
          left: ${player.position.x}vw;
-         box-shadow: 0 0 16px ${player.color}`
+         box-shadow: 0 0 2vw 0.75vw ${player.color}`
     )
 })
